@@ -12,20 +12,21 @@ const navItems = [
   { name: "Playlists", href: "/playlist" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-60 bg-emerald-950 p-4 flex flex-col h-full text-stone-50">
+    <div className="flex flex-col h-full p-4 bg-[#c78d57]">
       <nav className="space-y-3 mb-6">
         {navItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className={`block text-sm sm:text-base font-medium transition ${
+            onClick={onClose}
+            className={`block text-sm font-medium ${
               pathname === item.href
-                ? "text-emerald-300"
-                : "text-stone-300 hover:text-emerald-300"
+                ? "text-[#63BAAB]"
+                : "text-[#FFE9CF] hover:text-[#DBA883]"
             }`}
           >
             {item.name}
@@ -34,16 +35,16 @@ export default function Sidebar() {
       </nav>
 
       <div>
-        <h3 className="text-stone-400 text-xs sm:text-sm mb-2">Contacts culturels</h3>
+        <h3 className="text-[#DBA883] text-xs mb-2">Contacts culturels</h3>
         <div className="space-y-2">
-          <div className="flex items-center space-x-2 text-xs sm:text-sm">
-            <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-amber-600 flex items-center justify-center text-[0.6rem] font-bold text-stone-50">
+          <div className="flex items-center space-x-2 text-sm">
+            <div className="w-6 h-6 rounded-full bg-[#63BAAB] flex items-center justify-center text-[0.6rem] font-bold text-white">
               R
             </div>
-            <span className="text-stone-200">Ravi (Inde)</span>
+            <span className="text-amber-50">Ravi (Inde)</span>
           </div>
         </div>
       </div>
-    </aside>
+    </div>
   );
 }

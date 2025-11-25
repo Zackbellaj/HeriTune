@@ -1,31 +1,67 @@
 // src/app/components/Player.tsx
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+
 export default function Player() {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const togglePlay = () => setIsPlaying((prev) => !prev);
+
   return (
-    <footer className="h-16 sm:h-20 bg-stone-100 border-t border-stone-200 flex items-center px-3 sm:px-4">
-      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-stone-300 rounded flex items-center justify-center text-sm sm:text-base text-stone-700">
-        ▶️
-      </div>
-      <div className="ml-2 sm:ml-4 min-w-0 flex-1">
-        <p className="font-semibold text-sm sm:text-base text-stone-900 truncate">
-          Chant Mandingue
-        </p>
-        <p className="text-xs text-stone-500 truncate">Tradition orale du Mandé</p>
-      </div>
-
-      <div className="flex items-center space-x-2 sm:space-x-4">
-        <button className="text-stone-500 hover:text-stone-700 text-sm sm:text-base">
-          ⏮️
-        </button>
-        <button className="text-stone-900 text-lg sm:text-xl">⏯️</button>
-        <button className="text-stone-500 hover:text-stone-700 text-sm sm:text-base">
-          ⏭️
-        </button>
+    <footer className="h-20 bg-amber-50 border-t border-[#DBA883]/30 flex items-center px-6">
+      <div className="min-w-0 max-w-xs mr-4">
+        {/* Image Track */}
+        <div className=" flex items-center space-x-3">
+          <div className="w-12 h-12 bg-[#FFE9CF] rounded">
+            <Image
+              src="/assets/track-images/chant-mandingue.jpeg"
+              alt="Chant Mandingue"
+              width={48}
+              height={48}
+              className="w-full h-full object-cover rounded"
+            />
+          </div>
+          </div>
+        <p className="font-semibold text-[#A35912] truncate">Chant Mandingue</p>
+        <p className="text-[#DBA883] text-sm truncate">Tradition orale du Mandé</p>
       </div>
 
-      {/* Progress bar only on medium+ screens */}
-      <div className="hidden sm:flex sm:w-24 md:w-32 lg:w-40 h-1 bg-stone-300 rounded-full ml-4">
-        <div className="w-1/3 h-full bg-amber-400 rounded-full"></div>
+      <div className="flex-1 flex justify-center">
+        <div className="flex items-center space-x-3">
+          <button className="p-2 rounded-full hover:bg-[#FADBBB]">
+            <Image src="/assets/previous.png" alt="Précédent" width={20} height={20} />
+          </button>
+          <button
+            onClick={togglePlay}
+            className="p-2 rounded-full bg-[#BE6815] hover:bg-[#A35912]"
+            aria-label={isPlaying ? "Pause" : "Lecture"}
+          >
+            <Image
+              src={isPlaying ? "/assets/pause.png" : "/assets/play-button.png"}
+              alt={isPlaying ? "Pause" : "Lecture"}
+              width={24}
+              height={24}
+            />
+          </button>
+          <button className="p-2 rounded-full hover:bg-[#FADBBB]">
+            <Image src="/assets/next-button.png" alt="Suivant" width={20} height={20} />
+          </button>
+        </div>
       </div>
+      <div>
+        {/*volume icon */}
+        <button className="p-2 rounded-full hover:bg-[#FADBBB]">
+          <Image src="/assets/volume.png" alt="Volume" width={20} height={20} />
+        </button>
+      </div>
+      <div className="hidden sm:flex items-center space-x-2 ml-4">
+        <div className="w-20 h-1 bg-[#DBA883]/30 rounded-full">
+          <div className="w-3/4 h-full bg-[#63BAAB] rounded-full"></div>
+        </div>
+      </div>
+
     </footer>
   );
 }

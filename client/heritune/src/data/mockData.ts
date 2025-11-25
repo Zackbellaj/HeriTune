@@ -6,6 +6,7 @@ export interface Track {
   description: string;
   ritualContext: string;
   therapeuticFunction: string;
+  img: string;
 }
 
 export interface Message {
@@ -74,6 +75,7 @@ const mockTracks: Track[] = [
     description: "Chant traditionnel des griots mandingues, transmis oralement depuis des siècles.",
     ritualContext: "Cérémonie d’initiation",
     therapeuticFunction: "Apaisement spirituel",
+    img: "chant-mandingue.jpeg",
   },
   {
     id: "2",
@@ -82,6 +84,7 @@ const mockTracks: Track[] = [
     description: "Récitation sacrée issue des textes védiques, utilisée en méditation.",
     ritualContext: "Méditation matinale",
     therapeuticFunction: "Harmonisation mentale",
+    img: "chant-vedique.jpeg",
   },
   {
     id: "3",
@@ -90,6 +93,7 @@ const mockTracks: Track[] = [
     description: "Technique vocale alpine utilisée par les bergers pour communiquer.",
     ritualContext: "Appel pastoral",
     therapeuticFunction: "Expression vocale libre",
+    img: "chant-yodel.jpeg",
   },
 ];
 
