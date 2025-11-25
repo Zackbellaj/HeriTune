@@ -13,8 +13,8 @@ export default function MessagesPage() {
         <div className="hidden md:block">
           <Sidebar />
         </div>
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 bg-gradient-to-b from-gray-900 to-black">
-          <h1 className="text-2xl font-bold mb-6">Messages</h1>
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 bg-stone-50">
+          <h1 className="text-2xl font-bold mb-6 text-black">Messages</h1>
           <div className="space-y-3">
             {contacts.map((contact) => (
               <Link
