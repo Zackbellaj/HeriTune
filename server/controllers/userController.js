@@ -28,3 +28,39 @@ exports.findMatches = async (req, res) => {
     res.status(500).send('Erreur Serveur');
   }
 };
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const { username, location, bio, culturalInterests } = req.body;
+    
+    // Préparer l'objet de mise à jour
+    const updateData = {};
+    if (username) updateData.username = username;
+    if (location) updateData.location = location;
+    if (bio) updateData.bio = bio;
+    
+    // Si interests est une string (venant de form-data), on la transforme en tableau
+    if (culturalInterests) {
+        updateData.culturalInterests = typeof culturalInterests === 'string' 
+            ? culturalInterests.split(',').map(tag => tag.trim()).filter(t => t) 
+            : culturalInterests;
+    }
+
+    // Gestion de l'avatar (si un fichier est envoyé)
+    if (req.file) {
+      updateData.avatar = req.file.path; // On enregistre le chemin
+    }
+
+    // Mise à jour en base
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { $set: updateData },
+      { new: true } // Renvoie l'objet modifié
+    ).select('-password');
+
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Erreur Serveur');
+  }
+};

@@ -37,3 +37,19 @@ exports.addCollaborator = async (req, res) => {
     res.status(500).send('Erreur Serveur');
   }
 };
+exports.getMyPlaylists = async (req, res) => {
+  try {
+    // On cherche les playlists où l'ID de l'utilisateur est dans le tableau 'collaborators'
+    // (Rappel : à la création, le créateur est ajouté automatiquement aux collaborateurs)
+    const playlists = await Playlist.find({ 
+      collaborators: req.user.id 
+    })
+    .populate('creator', 'username') // Pour afficher "Créé par..."
+    .sort({ _id: -1 }); // Les plus récentes en premier
+
+    res.json(playlists);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Erreur Serveur');
+  }
+};
